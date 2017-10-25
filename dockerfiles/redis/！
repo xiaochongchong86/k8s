@@ -1,0 +1,19 @@
+FROM kub01.news.bjyt.a.com:5000/centos:6.6
+
+RUN rm -rf /etc/yum.repos.d/*
+COPY repos/* /etc/yum.repos.d/
+
+RUN  mkdir -p  /home/s/apps
+
+
+COPY lib  /home/s/lib
+RUN   echo '/home/s/lib' > /etc/ld.so.conf.d/home_s.conf \
+      && ldconfig
+COPY qlogd_centos6.2.1.52   /home/s/apps/qlogd
+RUN  rpm --rebuilddb  \
+    &&yum localinstall -y   /home/s/apps/qlogd/rpm/*.rpm
+
+
+COPY btime_degradation.centos6.1.0.16   /home/s/apps/degradation
+WORKDIR /home/s/apps/degradation
+CMD "sh start.sh"

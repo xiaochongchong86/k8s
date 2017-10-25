@@ -1,0 +1,6 @@
+INFO [2017-02-23 10:40:09]  broker 10.188.96.29:9092,10.138.104.216:9092,10.138.104.217:9092 zkServers10.188.96.29:2181
+INFO [2017-02-23 20:00:23]  broker 10.188.96.29:9092,10.138.104.216:9092,10.138.104.217:9092 zkServers10.188.96.29:2181
+INFO [2017-02-23 20:00:24]  init seekOffsetVersion: 3
+INFO [2017-02-23 20:00:24]  assign topic aa-phplowapi-test partitions 0 1
+INFO [2017-02-23 20:00:24]  ["create",["\/consumers\/aa-phplowapi-test\/consumephp-fangbo-test1\/mobiledev03v.add.corp.a.com_10.16.59.212_7793","[0,1]",[{"perms":31,"scheme":"world","id":"anyone"}],1]]
+INFO [2017-02-23 20:00:24]  create consumer pid and partition: [0,1] to path:/consumers/aa-phplowapi-test/consumephp-fangbo-test1/mobiledev03v.add.corp.a.com_10.16.59.212_7793 suc

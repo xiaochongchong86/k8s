@@ -1,0 +1,21 @@
+centos version 6.6
+
+redis version redis-4.0.2
+
+ruby version ruby-2.2.7
+
+此处考虑空间问题将redis和ruby 删掉了
+
+ruby 安装完后用gem 安装redis 类库的时候会报ssl的错误，解决方式是
+cd /data/ruby-2.2.7/ext/openssl/ && ruby extconf.rb  修改生成的Makefile 添加top_srcdir = /data/ruby-2.2.7 或者  ../..
+
+
+#生成dockerfile
+vim Dockerfile
+
+#生成镜像
+docker build .
+docker commit --author suncongcong --message 'install redis'  3b24377b4a97  redis_c:v3
+#tag 镜像 并push到仓库
+docker tag redis_c:v3  kub01.news.bjyt.a.com:5000/redis_c:latest
+docker push kub01.news.bjyt.a.com:5000/redis_c:latest

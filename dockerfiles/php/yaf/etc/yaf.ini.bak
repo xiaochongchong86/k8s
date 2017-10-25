@@ -1,0 +1,7 @@
+[yaf]
+extension=yaf.so
+{% if grains['idc_info'] == 'bjyt' %}
+yaf.environ = bjdt
+{% else %}
+yaf.environ = {{ grains['idc_info'] }}
+{% endif %}

@@ -1,0 +1,2 @@
+persistentVolumeReclaimPolicy不管设置成什么(Retain,Recycle,Delete),在这种方式下都是
+不好使的，都没办法重建pvc的时候继续使用之前的pv，只能删掉pv再重建。

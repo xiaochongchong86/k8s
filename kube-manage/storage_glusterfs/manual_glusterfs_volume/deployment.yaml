@@ -1,0 +1,43 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-use-glusterfs
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: web-use-glusterfs
+      labels:
+        app: web-glusterfs
+        usefor: test
+
+    spec:
+      containers:
+        - image: kub01.news.bjyt.qihoo.net:5000/light_web:1.0
+          name: web-glusterfs
+          volumeMounts:
+            - mountPath: /var/log/
+              name: varlog
+          ports:
+            - containerPort: 2333
+
+      volumes:
+        - name: varlog
+          glusterfs: 
+            endpoints: glusterfs-cluster-test
+            path: "gv02"
+            readOnly: false
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: web-use-glusterfs
+spec:
+  ports:
+    - port: 80
+      targetPort: 2333
+      protocol: TCP
+  selector:
+    app: web-glusterfs

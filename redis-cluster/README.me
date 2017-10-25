@@ -1,0 +1,32 @@
+#k8s  redis cluster  此处用的redis是4.0.3,虽然redis 4 支持nat模式， 但是此处用的还是host模式
+
+kubectl create -f redis_cluster.yaml
+kubectl create -f redis_green.yaml
+
+
+[root@kub01 ~]# kubectl get pod -l app=redis
+NAME                           READY     STATUS    RESTARTS   AGE
+redis-blue-1926577768-fdvz9    1/1       Running   0          3h
+redis-blue-1926577768-gqrls    1/1       Running   0          3h
+redis-blue-1926577768-rhgp0    1/1       Running   0          3h
+redis-green-1817657688-6476w   1/1       Running   0          20h
+redis-green-1817657688-8r4bq   1/1       Running   0          20h
+redis-green-1817657688-zn27m   1/1       Running   0          20h
+
+创建cluster
+[root@kub01 ~]# kubectl exec -it redis-blue-1926577768-fdvz9  /bin/bash
+
+/data/redis/src/redis-trib.rb create --replicas 1  10.208.42.27:6379  10.208.42.27:6380  10.208.34.144:6379  10.208.34.144:6380 10.208.42.44:6379  10.208.42.44:6380
+
+
+host 模式就直接连接访问就行了
+
+
+#存在的问题思考
+1.某一个节点down机怎么办
+
+2.redis 升级
+
+3.k8s redis_cluster.yaml  被删除会怎样
+
+4.master slave 如何平衡

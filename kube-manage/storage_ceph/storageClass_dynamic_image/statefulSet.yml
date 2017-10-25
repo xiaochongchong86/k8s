@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elas
+  labels:
+    app: elas
+spec:
+  ports:
+    - port: 9200
+      name: elas-data
+  clusterIP: None
+  selector:
+    app: elasticsearch
+
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: elasticsearch
+spec:
+  serviceName: "elas"
+  replicas: 1
+  volumeClaimTemplates:
+    - metadata:
+        name: esdata
+        annotations:
+          volume.beta.kubernetes.io/storage-class: ceph-rbd
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 10Gi 
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: es
+        image: kub01.news.bjyt.qihoo.net:5000/elasticsearch:5.5.0
+        ports:
+          - containerPort: 9200
+            name: elas-data
+
+        volumeMounts:
+        - mountPath: "/usr/share/elasticsearch/data"
+          name: esdata

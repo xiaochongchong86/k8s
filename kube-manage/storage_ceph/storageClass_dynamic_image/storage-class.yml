@@ -1,0 +1,15 @@
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ceph-rbd
+  provisioner: kubernetes.io/rbd
+  parameters:
+    monitors: 10.208.129.11:6789,10.208.129.29:6789,10.208.129.44:6789
+    #adminId: client.btime
+    adminId: btime
+    adminSecretName: ceph-secret
+    adminSecretNamespace: default
+    pool: btime_pool
+    #userId: client.btime
+    userId: btime
+    userSecretName: ceph-secret

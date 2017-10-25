@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: btime-dagradation
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: btime-dagradation
+      labels:
+        name: btime-dagradation
+    spec:
+      containers:
+      - image: kub01.news.bjyt.qihoo.net:5000/degradation:0.0.1
+        name: degradation
+        env:
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MY_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+        volumeMounts:
+          - mountPath: /home/s/apps/qlogd/log
+            name: data
+    
+      - image: kub01.news.bjyt.qihoo.net:5000/btime_qconf:1.0.5
+        name: qconf
+        env:
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MY_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+
+      - image: kub01.news.bjyt.qihoo.net:5000/btime_qlogd:1.0.1
+        name: qlogd
+        env:
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MY_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+        ports:
+        - containerPort: 8999
+      volumes:
+        - name: data
+          emptyDir: {}

@@ -1,0 +1,6 @@
+[qihoo]
+name=CentOS-$releasever - Qihoo Apps
+mirrorlist=http://config1.cloud.a.com:8360/repos/repos.php?release=$releasever&arch=$basearch&repo=qihoo&org=app
+gpgcheck=0
+
+

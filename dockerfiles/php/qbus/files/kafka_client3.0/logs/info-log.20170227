@@ -1,0 +1,42 @@
+INFO [2017-02-27 15:14:37]  broker 10.188.96.29:9092,10.138.104.216:9092,10.138.104.217:9092 zkServers10.188.96.29:2181
+INFO [2017-02-27 15:14:37]  init seekOffsetVersion: 0
+INFO [2017-02-27 15:14:38]  assign topic offsetconsume partitions 0 1 2
+INFO [2017-02-27 15:14:38]  ["create",["\/consumers\/offsetconsume\/default\/mobiledev03v.add.corp.a.com_10.16.59.212_2645","[0,1,2]",[{"perms":31,"scheme":"world","id":"anyone"}],1]]
+INFO [2017-02-27 15:14:38]  create consumer pid and partition: [0,1,2] to path:/consumers/offsetconsume/default/mobiledev03v.add.corp.a.com_10.16.59.212_2645 suc
+INFO [2017-02-27 15:14:39]  topic offsetconsume partition 2 offset 2000 commited
+INFO [2017-02-27 15:14:39]  topic offsetconsume partition 2 offset 3000 commited
+INFO [2017-02-27 15:14:39]  commit trigger check verison
+INFO [2017-02-27 15:14:39]  check version currentSeekOffsetVer: 0 old version: 0 partitions: [0,1,2]
+INFO [2017-02-27 15:14:39]  topic offsetconsume partition 2 offset 4000 commited
+INFO [2017-02-27 15:15:00]  broker 10.188.96.29:9092,10.138.104.216:9092,10.138.104.217:9092 zkServers10.188.96.29:2181
+INFO [2017-02-27 15:15:00]  init seekOffsetVersion: 0
+INFO [2017-02-27 15:15:09]  assign topic offsetconsume partitions 0 1 2
+INFO [2017-02-27 15:15:09]  ["create",["\/consumers\/offsetconsume\/default\/mobiledev03v.add.corp.a.com_10.16.59.212_2762","[0,1,2]",[{"perms":31,"scheme":"world","id":"anyone"}],1]]
+INFO [2017-02-27 15:15:09]  create consumer pid and partition: [0,1,2] to path:/consumers/offsetconsume/default/mobiledev03v.add.corp.a.com_10.16.59.212_2762 suc
+INFO [2017-02-27 15:15:10]  topic offsetconsume partition 2 offset 5000 commited
+INFO [2017-02-27 15:15:10]  topic offsetconsume partition 2 offset 6000 commited
+INFO [2017-02-27 15:15:10]  topic offsetconsume partition 2 offset 7000 commited
+INFO [2017-02-27 15:15:10]  topic offsetconsume partition 1 offset 2000 commited
+INFO [2017-02-27 15:15:11]  topic offsetconsume partition 1 offset 3000 commited
+INFO [2017-02-27 15:15:11]  topic offsetconsume partition 1 offset 4000 commited
+INFO [2017-02-27 15:15:11]  topic offsetconsume partition 1 offset 5000 commited
+INFO [2017-02-27 15:15:12]  topic offsetconsume partition 1 offset 6000 commited
+INFO [2017-02-27 15:15:12]  topic offsetconsume partition 0 offset 2000 commited
+INFO [2017-02-27 15:15:12]  topic offsetconsume partition 0 offset 3000 commited
+INFO [2017-02-27 15:15:13]  topic offsetconsume partition 0 offset 4000 commited
+INFO [2017-02-27 15:15:13]  topic offsetconsume partition 0 offset 5000 commited
+INFO [2017-02-27 15:15:13]  topic offsetconsume partition 0 offset 6000 commited
+INFO [2017-02-27 15:15:13]  commit trigger check verison
+INFO [2017-02-27 15:15:13]  check version currentSeekOffsetVer: 0 old version: 0 partitions: [0,1,2]
+INFO [2017-02-27 15:34:25]  broker 10.188.96.29:9092,10.138.104.216:9092,10.138.104.217:9092 zkServers10.188.96.29:2181
+INFO [2017-02-27 15:34:25]  init seekOffsetVersion: 0
+INFO [2017-02-27 15:34:25]  assign topic offsetconsume partitions 0 1 2
+INFO [2017-02-27 15:34:25]  ["create",["\/consumers\/offsetconsume\/default\/mobiledev03v.add.corp.a.com_10.16.59.212_24351","[0,1,2]",[{"perms":31,"scheme":"world","id":"anyone"}],1]]
+INFO [2017-02-27 15:34:25]  create consumer pid and partition: [0,1,2] to path:/consumers/offsetconsume/default/mobiledev03v.add.corp.a.com_10.16.59.212_24351 suc
+INFO [2017-02-27 15:34:41]  timeout trigger check verison
+INFO [2017-02-27 15:34:41]  check version currentSeekOffsetVer: 0 old version: 0 partitions: [0,1,2]
+INFO [2017-02-27 15:42:57]  broker 10.188.96.29:9092,10.138.104.216:9092,10.138.104.217:9092 zkServers10.188.96.29:2181
+INFO [2017-02-27 15:42:57]  init seekOffsetVersion: 3
+INFO [2017-02-27 15:42:57]  assign topic offsetconsume partitions 0 1 2
+INFO [2017-02-27 15:42:57]  ["create",["\/consumers\/offsetconsume\/defaulta\/mobiledev03v.add.corp.a.com_10.16.59.212_1136","[0,1,2]",[{"perms":31,"scheme":"world","id":"anyone"}],1]]
+INFO [2017-02-27 15:42:57]  create consumer pid and partition: [0,1,2] to path:/consumers/offsetconsume/defaulta/mobiledev03v.add.corp.a.com_10.16.59.212_1136 suc

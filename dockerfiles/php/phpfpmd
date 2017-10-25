@@ -1,0 +1,119 @@
+#!/bin/bash
+#
+# php-fpm		This shell script takes care of starting and stopping
+#		php-fpm (php fast-cgi daemon).
+#
+# chkconfig: - 58 74
+# description: phpfpmd is the php fast cgi daemon.
+
+#used to change qconf agent env 
+
+idc=`echo $MY_NODE_NAME|awk -F '.' '{print $3}'`
+
+if [ -z $idc ]
+then
+   idc=bjyt
+fi
+
+if grep $idc /home/q/system/qconf-agent/conf/agent.conf; then echo "Set idc to $idc."; else echo "Wrong idc $idc."; fi
+
+echo $idc > /home/q/system/qconf-agent/conf/localidc
+
+############################
+
+# Source function library.
+. /etc/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+config="/home/s/apps/php/etc/php-fpm.conf"
+
+if [ -f $config ];then
+    :
+else
+    echo "no $config file exists!"
+    exit 1
+fi
+
+RETVAL=0
+prog="/home/s/apps/php/sbin/php-fpm"
+#prog="/home/s/apps/php/bin/php-cgi"
+opts="-c /home/s/apps/php/etc/php.ini"
+
+#testconf() {
+#    $prog -t --fpm-config $config > /dev/null 2>&1 || ($prog -t --fpm-config $config;exit 1)
+#}
+
+start() {
+	# Check that networking is up.
+	[ "$NETWORKING" = "no" ] && exit 1
+    # Start daemons.
+	if [ -n "`/sbin/pidof php-fpm`" ]; then
+		echo -n "$prog: already running"
+		failure $"$prog start"
+		echo
+		return 1
+	fi
+    echo -n $"Starting $prog: "
+    daemon $prog $opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/php-fpm
+	return $RETVAL
+}
+
+stop() {
+    echo -n $"Shutting down $prog: "
+    killproc php-fpm
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/php-fpm
+	return $RETVAL
+}
+
+reload() {
+    echo -n $"reloading down $prog: "
+    if [ -f /home/s/var/proc/php-fpm.pid ];then
+	kill -USR2 `cat /home/s/var/proc/php-fpm.pid`
+	RETVAL=$?
+    else
+	RETVAL=123
+    fi
+    echo
+    return $RETVAL
+}
+# See how we were called.
+case "$1" in
+  start)
+	start
+    ;;
+  stop)
+	stop
+    ;;
+  status)
+	status php-fpm
+	RETVAL=$?
+	;;
+  restart)
+    stop
+    start
+	RETVAL=$?
+    ;;
+  reload)
+	reload
+	RETVAL=$?
+	;;
+  condrestart)
+	if [ -f /var/lock/subsys/php-fpm ]; then
+	    stop
+	    start
+	    RETVAL=$?
+	fi
+	;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|condrestart|status}"
+        RETVAL=3
+esac
+
+exit $RETVAL
+
